@@ -50,8 +50,7 @@ func main() {
 	for scanner.Scan() {
 		i, err := strconv.Atoi(scanner.Text())
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(2)
+			log.Fatal(err)
 		}
 		inputInts = append(inputInts, i)
 	}
