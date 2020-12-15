@@ -5,9 +5,9 @@ def solve(line: str, until: int):
     current_digit = 0
     digits_last_seen = {}
     start_digit_list = [int(n) for n in line.split(',')]
-    for i in range(len(start_digit_list)):
-        digits_last_seen[start_digit_list[i]] = i
-        current_digit = start_digit_list[i]
+    for index, value in enumerate(start_digit_list):
+        digits_last_seen[value] = index
+        current_digit = value
     for i in range(len(start_digit_list)-1, until-1):
         age = 0
         if current_digit in digits_last_seen:
