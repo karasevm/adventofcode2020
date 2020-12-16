@@ -40,19 +40,32 @@ func parseFields(lines []string) []field {
 	return result
 }
 
+func intSliceIntersect(sliceA []int, sliceB []int) []int {
+	var result []int
+	for _, valA := range sliceA {
+		for _, valB := range sliceB {
+			if valA == valB {
+				result = append(result, valA)
+			}
+		}
+	}
+	return result
+}
+
 func valueFitsField(value int, f field) bool {
 	return ((value >= f.minA && value <= f.maxA) || (value >= f.minB && value <= f.maxB))
 }
 
 func valueFitsFieldSlice(value int, fieldSlice []field) bool {
 	for _, f := range fieldSlice {
-		if (value >= f.minA && value <= f.maxA) || (value >= f.minB && value <= f.maxB) {
+		if valueFitsField(value, f) {
 			return true
 		}
 	}
 	return false
 }
 
+// https://stackoverflow.com/a/19374861
 func difference(slice1 []int, slice2 []int) []int {
 	var diff []int
 
@@ -106,27 +119,6 @@ func part1(lines []string) int {
 	}
 
 	return sum
-}
-
-func intSliceIntersect(sliceA []int, sliceB []int) []int {
-	var result []int
-	for _, valA := range sliceA {
-		for _, valB := range sliceB {
-			if valA == valB {
-				result = append(result, valA)
-			}
-		}
-	}
-	return result
-}
-
-func removeIntFromSlice(slice []int, n int) []int {
-	for index, val := range slice {
-		if val == n {
-			return append(slice[:index], slice[index+1:]...)
-		}
-	}
-	return slice
 }
 
 func part2(lines []string) int {
